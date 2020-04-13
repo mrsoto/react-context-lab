@@ -1,6 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Action from './Action'
+import { CounterProvider } from './CountContext'
 
 function App() {
   return (
@@ -19,6 +21,16 @@ function App() {
           Learn React
         </a>
       </header>
+      <body>
+        <div>First Context</div>
+        <CounterProvider initialValue={0}>
+          <Action />
+        </CounterProvider>
+        <div>2dn Context</div>
+        <CounterProvider initialValue={10}>
+          <Action />
+        </CounterProvider>
+      </body>
     </div>
   );
 }
