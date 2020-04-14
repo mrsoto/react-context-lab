@@ -1,18 +1,6 @@
-import React, { useState } from "react";
-import { useCounter } from "./useCounter";
+import React from "react";
+import { useCounter, initialState } from "./useCounter";
 
-/**
- * @type {import("./useCounter").CounterState}
- */
-const initialState = {
-    counter: 0,
-    actions: {
-        decrement: undefined,
-        increment: undefined,
-        incrementBy: undefined,
-        decrementBy: undefined
-    }
-}
 export const Context = React.createContext(initialState);
 
 export const CounterProvider = ({ children, initialValue }) => {

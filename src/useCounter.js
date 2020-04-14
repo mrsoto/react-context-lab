@@ -10,6 +10,15 @@ import { useState, useMemo } from "react";
   @typedef {{ counter: number, actions: CounterStateActions}} CounterState
  */
   
+ 
+/**
+ * @type {CounterState}
+ */
+export const initialState = {
+    counter: 0,
+    actions: undefined
+}
+
  /**
   * 
   * @param {number} initialValue 
