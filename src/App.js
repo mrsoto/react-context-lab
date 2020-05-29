@@ -1,8 +1,12 @@
 import React from 'react';
+// @ts-ignore
 import logo from './logo.svg';
 import './App.css';
 import Action from './Action'
-import { CounterProvider } from './CountContext'
+import { CounterProvider } from './contexts/CountContext'
+import { ChronoProvider } from './contexts/ChronoContext'
+import { ChronoPanel } from './ChronoPanel';
+import { ChronoControls } from './ChronoControls';
 
 function App() {
   return (
@@ -10,7 +14,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Strong type useContext POC.
         </p>
         <a
           className="App-link"
@@ -21,16 +25,20 @@ function App() {
           Learn React
         </a>
       </header>
-      <body>
-        <div>First Context</div>
-        <CounterProvider initialValue={0}>
-          <Action />
-        </CounterProvider>
-        <div>2dn Context</div>
-        <CounterProvider initialValue={10}>
-          <Action />
-        </CounterProvider>
-      </body>
+      <section>
+        <ChronoProvider>
+          <ChronoPanel />
+          <div>First Context</div>
+          <CounterProvider initialValue={0}>
+            <Action />
+          </CounterProvider>
+          <div>2dn Context</div>
+          <CounterProvider initialValue={10}>
+            <Action />
+          </CounterProvider>
+          <ChronoControls/>
+        </ChronoProvider>
+      </section>
     </div>
   );
 }

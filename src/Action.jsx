@@ -1,13 +1,12 @@
-import React, { useMemo } from 'react';
-import { Context as CounterContext } from './CountContext'
-import { useContext } from 'react'
+import React, { useCallback } from 'react';
+import { useCounterContext } from './contexts/CountContext'
 
 const Action = () => {
-    const ctx = useContext(CounterContext)
+    const ctx = useCounterContext()
     const sub1 = ctx.actions.decrement
     const add1 = ctx.actions.increment
-    const sub10 = useMemo(() => () => ctx.actions.decrementBy(10), [ctx.actions.decrementBy])
-    const add10 = useMemo(() => () => ctx.actions.incrementBy(10), [ctx.actions.incrementBy])
+    const sub10 = useCallback(() => ctx.actions.decrementBy(10), [ctx.actions])
+    const add10 = useCallback(() => ctx.actions.incrementBy(10), [ctx.actions])
 
     return (
         <section>

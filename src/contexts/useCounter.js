@@ -7,22 +7,22 @@ import { useState, useMemo } from "react";
     decrementBy: (n: number) => void;
   }} CounterStateActions 
 
-  @typedef {{ counter: number, actions: CounterStateActions}} CounterState
+  @typedef {{ counter: number}} CounterState
  */
   
  
 /**
- * @type {CounterState}
+ * @type {{counter:number, actions: CounterStateActions}}
  */
-export const initialState = {
-    counter: 0,
-    actions: undefined
-}
+// @ts-ignore
+export const initialState = Object.freeze({
+    counter: 0
+})
 
  /**
   * 
   * @param {number} initialValue 
-  * @returns {CounterState} context
+  * @returns {{counter:number, actions: CounterStateActions}} context
   */
 export function useCounter(initialValue) {
     const [counter, updater] = useState(initialValue);
