@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 ReactDOM.render(
   <React.StrictMode>
     <App />
+    <footer>Visual design is in holiday</footer>
   </React.StrictMode>,
   document.getElementById('root')
 );

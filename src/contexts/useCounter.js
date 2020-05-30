@@ -28,15 +28,9 @@ export function useCounter(initialValue) {
     const [counter, updater] = useState(initialValue);
   
     const actions = useMemo(() => {
-        /**
-         * 
-         * @param {number} n 
-         */
+        /** @param {number} n  */
         const incrementBy = n => updater(count => count + n);
-        /**
-         * 
-         * @param {number} n 
-         */
+        /** @param {number} n */
         const decrementBy = n => incrementBy(-n);
         const decrement = () => decrementBy(1);
         const increment = () => incrementBy(1);

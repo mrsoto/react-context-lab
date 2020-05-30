@@ -1,45 +1,43 @@
 import React from 'react';
 // @ts-ignore
-import logo from './logo.svg';
 import './App.css';
-import Action from './Action'
+import CountersPanel from './CountersPanel'
 import { CounterProvider } from './contexts/CountContext'
 import { ChronoProvider } from './contexts/ChronoContext'
 import { ChronoPanel } from './ChronoPanel';
 import { ChronoControls } from './ChronoControls';
+import { TodoList } from './TodoList';
+import { TodoListProvider } from './contexts/TodoListContext';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Strong type useContext POC.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <section>
+    <section className="App">
+      <aside>
+        <TodoListProvider>
+          <TodoList />
+        </TodoListProvider>
+      </aside>
+      <div className="root">
         <ChronoProvider>
-          <ChronoPanel />
-          <div>First Context</div>
-          <CounterProvider initialValue={0}>
-            <Action />
-          </CounterProvider>
-          <div>2dn Context</div>
-          <CounterProvider initialValue={10}>
-            <Action />
-          </CounterProvider>
-          <ChronoControls/>
+          <div className="root__chrono">
+            <ChronoPanel />
+          </div>
+          <div>
+            <p>First Context</p>
+            <CounterProvider initialValue={0}>
+              <CountersPanel />
+            </CounterProvider>
+            <p>2dn Context</p>
+            <CounterProvider initialValue={10}>
+              <CountersPanel />
+            </CounterProvider>
+          </div>
+          <div className="root__chrono-controls">
+            <ChronoControls />
+          </div>
         </ChronoProvider>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }
 
