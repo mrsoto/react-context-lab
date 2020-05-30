@@ -1,5 +1,5 @@
 import React from 'react'
-import { useChronoContext } from './contexts/ChronoContext'
+import { useChronoContext } from './ChronoContext'
 import classnames from 'classnames'
 
 export const ChronoPanel = () => {

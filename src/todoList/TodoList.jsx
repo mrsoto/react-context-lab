@@ -1,9 +1,9 @@
 import React, { useCallback, useState } from 'react'
-import { useTodoListContext } from './contexts/TodoListContext'
+import { useTodoListContext } from '.'
 import classNames from 'classnames'
 
 /**
- * @typedef {import('./contexts/TodoListContext').Todo} Todo
+ * @typedef {import('.').Todo} Todo
  */
 
 /**

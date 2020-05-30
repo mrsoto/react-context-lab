@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
-import { useCounterContext } from './contexts/CountContext'
+import { useCounterContext } from './CountContext'
 
-const CountersPanel = () => {
+export const CountersPanel = () => {
     const ctx = useCounterContext()
     const sub1 = ctx.actions.decrement
     const add1 = ctx.actions.increment
@@ -20,5 +20,3 @@ const CountersPanel = () => {
         </section>
     )
 }
-
-export default CountersPanel

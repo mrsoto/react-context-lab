@@ -3,6 +3,7 @@
         "browserslist",
         "chrono",
         "cyclomatic",
-        "inmutable"
+        "inmutable",
+        "millis"
     ]
 }

@@ -1,5 +1,5 @@
 import { useMemo, useReducer } from "react";
-import { reduceBuilder, createAction } from "../../core/reducerBuilder";
+import { reduceBuilder, createAction } from "../core/reducerBuilder";
 
 /**
   @typedef {{
@@ -76,7 +76,7 @@ export function useTodoList(initialState = inmutableState) {
 }
 
 /**
- * @typedef {import('../../core/reducerBuilder').PayloadContainer<P>} PayloadContainer
+ * @typedef {import('../core/reducerBuilder').PayloadContainer<P>} PayloadContainer
  * @template P
  */
 

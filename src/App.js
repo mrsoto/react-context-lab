@@ -1,13 +1,10 @@
-import React from 'react';
+import React from "react";
 // @ts-ignore
-import './App.css';
-import CountersPanel from './CountersPanel'
-import { CounterProvider } from './contexts/CountContext'
-import { ChronoProvider } from './contexts/ChronoContext'
-import { ChronoPanel } from './ChronoPanel';
-import { ChronoControls } from './ChronoControls';
-import { TodoList } from './TodoList';
-import { TodoListProvider } from './contexts/TodoListContext';
+import "./App.css";
+import { CountersPanel, CounterProvider } from "./counter";
+import { ChronoPanel, ChronoProvider, ChronoControls } from "./chrono";
+import { TodoList } from "./todoList";
+import { TodoListProvider } from "./todoList";
 
 function App() {
   return (

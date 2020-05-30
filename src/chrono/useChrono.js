@@ -29,19 +29,11 @@ const inmutableState = Object.freeze({
   offset: null
 });
 
-/**  @type Readonly<ChronoContext> */
-export const initialContextValue = Object.freeze({
-  _state: inmutableState,
-  handlers: {
-  pause: null,
-  resume: null,
-  getMinutes: null,
-  getSecs: null,
-  isPaused: null
-}})
+export const initialContextValue = /** @type Readonly<ChronoContext> */ (Object.freeze({
+  _state: inmutableState}))
 
 /**
- * Chrono hoock, an opaque state with selectors and actions
+ * Chrono hock, an opaque state with selectors and actions
  * @returns {{
  *  _state: object
  *  handlers: ClockHandlers
