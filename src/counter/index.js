@@ -1,2 +1,2 @@
-export { CounterProvider, useCounterContext} from './CountContext'
-export { CountersPanel } from './CountersPanel'
+export { CounterProvider, useCounterContext } from "./CountContext";
+export { CountersPanel } from "./CountersPanel";

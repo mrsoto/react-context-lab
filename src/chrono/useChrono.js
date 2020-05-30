@@ -26,11 +26,14 @@ import { useState, useMemo, useEffect } from "react";
 const inmutableState = Object.freeze({
   millis: 0,
   ticks: 0,
-  offset: null
+  offset: null,
 });
 
-export const initialContextValue = /** @type Readonly<ChronoContext> */ (Object.freeze({
-  _state: inmutableState}))
+export const initialContextValue = /** @type Readonly<ChronoContext> */ (Object.freeze(
+  {
+    _state: inmutableState,
+  }
+));
 
 /**
  * Chrono hock, an opaque state with selectors and actions
@@ -42,24 +45,28 @@ export const initialContextValue = /** @type Readonly<ChronoContext> */ (Object.
 export function useChrono() {
   const [chrono, updater] = useState(inmutableState);
 
-  useEffect(tickEffect(chrono, updater), [chrono.offset])
+  useEffect(tickEffect(chrono, updater), [chrono.offset]);
 
   const selectors = useMemo(() => {
-    const getSecs = () => Math.trunc(calcTotalMillis(chrono) / 1000) % 60
-    const getMinutes = () => Math.trunc(calcTotalMillis(chrono) / 1000 / 60)
-    const isPaused = () => !Boolean(chrono.offset)
-    
+    const getSecs = () => Math.trunc(calcTotalMillis(chrono) / 1000) % 60;
+    const getMinutes = () => Math.trunc(calcTotalMillis(chrono) / 1000 / 60);
+    const isPaused = () => !Boolean(chrono.offset);
+
     return {
       getSecs,
       getMinutes,
-      isPaused
+      isPaused,
     };
-  }, [chrono])
-
+  }, [chrono]);
 
   const actions = useMemo(() => {
-    const pause = () => updater(state => ({ ...state, offset: null, millis: calcTotalMillis(state) }));
-    const resume = () => updater(state => ({ ...state, offset: Date.now() }));
+    const pause = () =>
+      updater((state) => ({
+        ...state,
+        offset: null,
+        millis: calcTotalMillis(state),
+      }));
+    const resume = () => updater((state) => ({ ...state, offset: Date.now() }));
 
     return {
       pause,
@@ -67,15 +74,18 @@ export function useChrono() {
     };
   }, [updater]);
 
-  const handlers = useMemo(() => ({ ...selectors, ...actions }), [selectors, actions])
+  const handlers = useMemo(() => ({ ...selectors, ...actions }), [
+    selectors,
+    actions,
+  ]);
 
   return { _state: chrono, handlers };
 }
 
 /**
  * Update the state every 1s
- * @param {ChronoState} chrono 
- * @param {React.Dispatch<React.SetStateAction<Readonly<ChronoState>>>} updater 
+ * @param {ChronoState} chrono
+ * @param {React.Dispatch<React.SetStateAction<Readonly<ChronoState>>>} updater
  */
 function tickEffect(chrono, updater) {
   return () => {
@@ -83,7 +93,7 @@ function tickEffect(chrono, updater) {
       return;
     }
     const intervalID = setInterval(() => {
-      updater(state => ({ ...state, ticks: state.ticks + 1 }));
+      updater((state) => ({ ...state, ticks: state.ticks + 1 }));
     }, 1000);
     return () => {
       clearInterval(intervalID);
@@ -92,9 +102,8 @@ function tickEffect(chrono, updater) {
 }
 
 /**
- * @param {ChronoState} chrono 
+ * @param {ChronoState} chrono
  */
 function calcTotalMillis(chrono) {
-  return chrono.millis + (chrono.offset ? (Date.now() - chrono.offset) : 0);
+  return chrono.millis + (chrono.offset ? Date.now() - chrono.offset : 0);
 }
-

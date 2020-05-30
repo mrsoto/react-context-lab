@@ -33,15 +33,15 @@ export const initialContextValue = Object.freeze({
     addTodo: null,
     toggleTodo: null,
     getTodoList: null,
-  }
-})
+  },
+});
 
-const ADD_TODO = Symbol("TODO:ADD-TODO")
-const TOGGLE_TODO = Symbol("TODO:TOGGLE-TODO")
+const ADD_TODO = Symbol("TODO:ADD-TODO");
+const TOGGLE_TODO = Symbol("TODO:TOGGLE-TODO");
 
 /**
  * TodoList hock: an opaque state with selectors and actions
- * 
+ *
  * @param {TodoListState} initialState
  * @returns {TodoListContext} context actions and selectors
  */
@@ -49,20 +49,19 @@ export function useTodoList(initialState = inmutableState) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const selectors = useMemo(() => {
-    const getTodoList = () => state
+    const getTodoList = () => state;
 
     return {
-      getTodoList
+      getTodoList,
     };
-  }, [state])
-
+  }, [state]);
 
   const actions = useMemo(() => {
     /** @param {string} title */
-    const addTodo = (title) => dispatch(createAction(ADD_TODO, {title}))
+    const addTodo = (title) => dispatch(createAction(ADD_TODO, { title }));
 
     /** @param {number} id */
-    const toggleTodo = (id) => dispatch(createAction(TOGGLE_TODO, {id}));
+    const toggleTodo = (id) => dispatch(createAction(TOGGLE_TODO, { id }));
 
     return {
       addTodo,
@@ -70,7 +69,10 @@ export function useTodoList(initialState = inmutableState) {
     };
   }, [dispatch]);
 
-  const handlers = useMemo(() => ({ ...selectors, ...actions }), [selectors, actions])
+  const handlers = useMemo(() => ({ ...selectors, ...actions }), [
+    selectors,
+    actions,
+  ]);
 
   return { _state: state, handlers };
 }
@@ -81,26 +83,27 @@ export function useTodoList(initialState = inmutableState) {
  */
 
 /**
- * @param {TodoListState} state 
- * @param {PayloadContainer<Pick<Todo,"title">>} action 
+ * @param {TodoListState} state
+ * @param {PayloadContainer<Pick<Todo,"title">>} action
  * @return {TodoListState}
  */
-const addTodo = (state, { payload: { title } }) => state.concat({ id: Date.now(), title, done: false })
+const addTodo = (state, { payload: { title } }) =>
+  state.concat({ id: Date.now(), title, done: false });
 
 /**
- * @param {TodoListState} state 
- * @param {PayloadContainer<Pick<Todo,"id">>} action 
+ * @param {TodoListState} state
+ * @param {PayloadContainer<Pick<Todo,"id">>} action
  * @return {TodoListState}
  */
-const toggleTodo = (state, { payload: { id } }) => state.map(todo => {
-  if (todo.id === id) {
-    return { ...todo, done: !todo.done }
-  }
-  return todo
-})
+const toggleTodo = (state, { payload: { id } }) =>
+  state.map((todo) => {
+    if (todo.id === id) {
+      return { ...todo, done: !todo.done };
+    }
+    return todo;
+  });
 
 const reducer = reduceBuilder()
   .withType(ADD_TODO, addTodo)
   .withType(TOGGLE_TODO, toggleTodo)
-  .build()
-
+  .build();
